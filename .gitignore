@@ -1,0 +1,8 @@
+# Competitive Programming Helper (VS Code) temp files
+.cph/
+
+# Compiled output
+output/
+*.exe
+*.out
+*.o
