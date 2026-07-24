@@ -19,37 +19,33 @@ int main()
     ll x, a, b, c;
     cin >> x >> a >> b >> c;
 
+    deque<pair<ll,ll>> dq;
+
     ll cur = x;
     ll ans = 0;
-
-    deque<pair<ll, ll>> mins; // 存储当前窗口使之单调<val,id>
-    mins.push_back({x, 1});
-
+    ll nextX;
     for (ll i = 1; i <= n; i++)
     {
-        if (i > 1)
-        {
-            cur = (a * cur + b) % c;
+        nextX = (i == 1 ? x : (nextX * a + b) % c);
+
+        while(i<=n && (!dq.empty() && dq.back().first >= nextX)){
+            dq.pop_back();
         }
 
-        while (!mins.empty() && mins.back().first >= cur)
-        {
-            mins.pop_back();
-        }
-        mins.push_back({cur, i});
+        dq.push_back({nextX,i});
 
-        while (!mins.empty() && mins.front().second <= i - k)
-        {
-            // 索引超过窗口大小
-            mins.pop_front();
+        while(!dq.empty() && dq.front().second <= i-k){
+            dq.pop_front();
         }
-        if (i >= k)
-        {
-            ans ^= mins.front().first;
+
+        if(i==k){
+            ans=(dq.front().first);
+        }else if(i>k){
+            ans^=(dq.front().first);
         }
+
     }
-
-    cout << ans << endl;
+    cout<<ans<<endl;
 
     return 0;
 }
