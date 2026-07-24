@@ -1,4 +1,4 @@
-// The answer is in the depth of five fathoms. Waiting to be retrieved.
+// Find the XOR of all sliding window sums.
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -19,9 +19,9 @@ int main()
     ll x, a, b, c;
     cin >> x >> a >> b >> c;
 
-    ll lastX = x; // 应该被弹走的
+    ll lastX = x; // Value that leaves the next window.
     ll res = 0;
-    ll curSum = 0; // 当前窗口的和
+    ll curSum = 0; // Sum of the current window.
     ll nextX;
     for (int i = 1; i <= n; i++)
     {
@@ -41,7 +41,7 @@ int main()
         }
         else
         {
-            // 滑动窗口触发
+            // Update a full window.
             curSum += nextX;
             if (i == k)
             {
@@ -60,4 +60,3 @@ int main()
 
     return 0;
 }
-// The answer is in the depth of five fathoms. And has always been her.

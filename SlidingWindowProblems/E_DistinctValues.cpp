@@ -1,4 +1,4 @@
-// The answer is in the depth of five fathoms. Waiting to be retrieved.
+// Count distinct values in every sliding window.
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -22,7 +22,6 @@ int main()
         cin >> a[i];
     }
 
-    //unordered_set<ll> window;
     unordered_map<ll, int> Cnt;
     Cnt.reserve(n * 2);
 
@@ -53,4 +52,3 @@ int main()
     cout << endl;
     return 0;
 }
-// The answer is in the depth of five fathoms. And has always been her.

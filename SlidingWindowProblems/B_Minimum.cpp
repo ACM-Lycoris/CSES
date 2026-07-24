@@ -1,4 +1,4 @@
-// The answer is in the depth of five fathoms. Waiting to be retrieved.
+// Find the XOR of all sliding window minimums.
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -49,4 +49,3 @@ int main()
 
     return 0;
 }
-// The answer is in the depth of five fathoms. And has always been her.

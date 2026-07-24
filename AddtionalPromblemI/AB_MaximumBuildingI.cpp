@@ -1,4 +1,4 @@
-// The answer is in the depth of five fathoms. Waiting to be retrieved.
+// Find the largest empty rectangle in the grid.
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -17,7 +17,7 @@ int main()
     ll n, m;
     cin >> n >> m;
     vector<vector<char>> graph(n + 1, vector<char>(m + 1));
-    vector<vector<int>> Temp(n + 1, vector<int>(m + 1, 0)); // 列有效高度
+    vector<vector<int>> Temp(n + 1, vector<int>(m + 1, 0)); // Height of empty cells in each column.
 
     for (int i = 1; i <= n; i++)
     {
@@ -34,7 +34,7 @@ int main()
 
     for (int i = 1; i <= n; i++)
     {
-        // 对于每一行
+        // Treat this row as the bottom of a histogram.
         vector<ll> curCol(m + 2, 0);
         for (int j = 1; j <= m; j++)
         {
@@ -71,4 +71,3 @@ int main()
 
     return 0;
 }
-// The answer is in the depth of five fathoms. And has always been her.

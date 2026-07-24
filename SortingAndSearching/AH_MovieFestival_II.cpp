@@ -1,4 +1,4 @@
-// The answer is in the depth of five fathoms. Waiting to be retrieved.
+// Watch as many movies as possible with k people.
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -19,7 +19,7 @@ int main()
         ll a, b;
         cin >> a >> b;
         movies[i] = {b, a};
-        // sort by end time, so first = end time (b), second = start time (a)
+        // Store the end time first, then sort by it.
     }
 
     sort(movies.begin(), movies.end());

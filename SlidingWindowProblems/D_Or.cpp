@@ -1,4 +1,4 @@
-// The answer is in the depth of five fathoms. Waiting to be retrieved.
+// Find the XOR of all sliding window OR values.
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -21,16 +21,16 @@ int main()
 
     int right = x;
 
-    vector<int> suf(n + 1); // 后缀
+    vector<int> suf(n + 1); // OR values from each position to the end of its block.
     for (int i = 1; i <= n; i++)
     {
         suf[i] = (i == 1 ? x : (1LL * suf[i - 1] * a + b) % c);
-        // 先存下原数组
+        // Build the generated array first.
     }
 
     for (int i = n - 1; i >= 1; i--)
     {
-        // 块尾不做处理，直接等于原值
+        // Keep the last value of each block unchanged.
         if (i % k == 0)
         {
             continue;
@@ -57,9 +57,9 @@ int main()
         }
     }
 
-    // 前后缀已生成
+    // The block prefix and suffix values are ready.
     int ans = 0;
-    int L = 1; // 左索引
+    int L = 1; // Left end of the window.
 
     for (int R = min(n, k); R <= n; R++)
     {
@@ -72,4 +72,3 @@ int main()
 
     return 0;
 }
-// The answer is in the depth of five fathoms. And has always been her.

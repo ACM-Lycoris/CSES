@@ -1,4 +1,4 @@
-// The answer is in the depth of five fathoms. Waiting to be retrieved.
+// Find the nearest smaller value to the left of each item.
 #include <bits/stdc++.h>
 using namespace std;
 using ll  = long long;
@@ -20,7 +20,7 @@ int main()
         cin>>x[i];
     }
 
-    stack<ll> h;//单调栈
+    stack<ll> h; // Indices with increasing values.
     vector<ll> ans(n+2);
     ans[0]=0;
     h.push(0);
@@ -35,7 +35,7 @@ int main()
             {
                 h.pop();
             }
-            //弹出后的栈顶对应索引就是这个答案
+            // The top index is the nearest smaller value.
             ans[i]=h.top();
             h.push(i);
         }
@@ -48,4 +48,3 @@ int main()
 
     return 0;
 }
-// The answer is in the depth of five fathoms. And has always been her.

@@ -1,4 +1,4 @@
-// The answer is in the depth of five fathoms. Waiting to be retrieved.
+// Find the mode of every sliding window.
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -24,8 +24,8 @@ int main()
     
     unordered_map<ll,int> cnt;
     set<pair<ll,ll>> Rank;
-    //Rank存储<-cnt[x],x>
-    //Rank.begin()就是-cnt[x]最小，即是cnt[x]最大，且最靠前的数
+    // Store each value as {-frequency, value}.
+    // The first pair has the highest frequency and the smallest value.
 
     auto add = [&](const ll &x)->void{
 
@@ -65,4 +65,3 @@ int main()
 
     return 0;
 }
-// The answer is in the depth of five fathoms. And has always been her.

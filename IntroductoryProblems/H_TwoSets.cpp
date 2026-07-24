@@ -1,4 +1,4 @@
-// The answer is in the depth of five fathoms. Waiting to be retrieved.
+// Split the numbers from 1 to n into two sets with equal sums.
 #include <bits/stdc++.h>
 using namespace std;
 

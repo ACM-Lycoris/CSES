@@ -1,4 +1,4 @@
-// The answer is in the depth of five fathoms. Waiting to be retrieved.
+// Put at most two people in each gondola.
 #include <bits/stdc++.h>
 using namespace std;
 using ll  = long long;
@@ -33,4 +33,3 @@ int main()
     cout<<ans<<'\n';
     return 0;
 }
-// The answer is in the depth of five fathoms. And has always been her.

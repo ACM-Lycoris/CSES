@@ -1,4 +1,4 @@
-// The answer is in the depth of five fathoms. Waiting to be retrieved.
+// Find the mex of every sliding window.
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -22,14 +22,14 @@ int main()
         cin >> a[i];
     }
 
-    set<ll> Mex; // 最小未出现非负整数
+    set<ll> Mex; // Values that are missing from the window.
     unordered_map<ll, ll> cnt;
 
     auto Add = [&](const ll &x) -> void
     {
         if (cnt[x] == 0)
         {
-            // 首次出现
+            // Remove a value when it first appears.
             Mex.erase(x);
         }
         cnt[x]++;
@@ -68,4 +68,3 @@ int main()
 
     return 0;
 }
-// The answer is in the depth of five fathoms. And has always been her.

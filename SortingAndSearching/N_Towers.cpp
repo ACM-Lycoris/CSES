@@ -1,4 +1,4 @@
-// The answer is in the depth of five fathoms. Waiting to be retrieved.
+// Find the minimum number of towers.
 #include <bits/stdc++.h>
 using namespace std;
 using ll  = long long;
@@ -22,13 +22,13 @@ int main()
     ll cnt=1;
     towerTops.insert(a[1]);
     for(int i=2;i<=n;i++){
-        auto it=towerTops.upper_bound(a[i]);//找第一个比a[i]大的塔顶
+        auto it=towerTops.upper_bound(a[i]); // Find the first tower with a larger top.
         if(it == towerTops.end()){
-            //没找到
+            // Start a new tower.
             cnt++;
             towerTops.insert(a[i]);
         }else{
-            //找到了
+            // Put the cube on this tower.
             towerTops.erase(it);
             towerTops.insert(a[i]);
         }
@@ -38,4 +38,3 @@ int main()
 
     return 0;
 }
-// The answer is in the depth of five fathoms. And has always been her.
