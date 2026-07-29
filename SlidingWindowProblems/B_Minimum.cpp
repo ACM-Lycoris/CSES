@@ -19,33 +19,33 @@ int main()
     ll x, a, b, c;
     cin >> x >> a >> b >> c;
 
-    deque<pair<ll,ll>> dq;
-
-    ll cur = x;
     ll ans = 0;
-    ll nextX;
-    for (ll i = 1; i <= n; i++)
-    {
-        nextX = (i == 1 ? x : (nextX * a + b) % c);
+    ll nextX = x;
 
-        while(i<=n && (!dq.empty() && dq.back().first >= nextX)){
+    deque<pair<ll, ll>> dq;
+
+    for (int i = 1; i <= n; i++)
+    {
+        nextX = (i == 1 ? x : (a * nextX + b) % c);
+
+        while (!dq.empty() && (dq.back().first >= nextX))
+        {
             dq.pop_back();
         }
 
-        dq.push_back({nextX,i});
+        dq.push_back({nextX, i});
 
-        while(!dq.empty() && dq.front().second <= i-k){
+        while (!dq.empty() && (dq.front().second <= i - k))
+        {
             dq.pop_front();
         }
 
-        if(i==k){
-            ans=(dq.front().first);
-        }else if(i>k){
-            ans^=(dq.front().first);
+        if (i >= k)
+        {
+            ans ^= (dq.front().first);
         }
-
     }
-    cout<<ans<<endl;
+    cout << ans << endl;
 
     return 0;
 }
