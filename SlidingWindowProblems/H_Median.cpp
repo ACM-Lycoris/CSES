@@ -27,16 +27,16 @@ int main()
     multiset<ll> large;
     multiset<ll> small;
 
-    auto Adjust = [&]() -> void // 维护函数
+    auto Adjust = [&]() -> void // Keep both sets balanced.
     {
-        while (large.size() > largeSize) // 大维护
+        while (large.size() > largeSize) // Move extra values to the upper set.
         {
             auto it = prev(large.end());
             small.insert(*it);
             large.erase(it);
         }
 
-        while (large.size() < largeSize && !small.empty()) // 小维护
+        while (large.size() < largeSize && !small.empty()) // Fill the lower set.
         {
             auto it = small.begin();
             large.insert(*it);
@@ -45,7 +45,7 @@ int main()
 
         if (!large.empty() && !small.empty() &&
             *large.rbegin() > *small.begin())
-        { // 对顶维护
+        { // Keep every lower value at most every upper value.
             ll leftMax = *large.rbegin();
             ll rightMin = *small.begin();
 
@@ -57,7 +57,7 @@ int main()
         }
     };
 
-    auto Add = [&](ll x) -> void { // 加元素
+    auto Add = [&](ll x) -> void { // Add one value.
         if (large.empty() || x <= *large.rbegin())
         {
             large.insert(x);
@@ -67,10 +67,10 @@ int main()
             small.insert(x);
         }
 
-        Adjust(); // 加元素后维护
+        Adjust(); // Restore balance after insertion.
     };
 
-    auto Remove = [&](ll x) -> void { // 删元素维护
+    auto Remove = [&](ll x) -> void { // Remove one value.
         auto it = large.find(x);
 
         if (it != large.end())

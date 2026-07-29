@@ -49,6 +49,7 @@ int main()
                 }
                 else if (color[v] == color[u])
                 {
+                    // Two linked nodes have the same color.
                     ok = false;
                     break;
                 }

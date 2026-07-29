@@ -1,4 +1,3 @@
-// Watch as many movies as possible with k people.
 #include <bits/stdc++.h>
 using namespace std;
 

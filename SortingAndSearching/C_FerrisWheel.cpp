@@ -1,4 +1,3 @@
-// Put at most two people in each gondola.
 #include <bits/stdc++.h>
 using namespace std;
 using ll  = long long;

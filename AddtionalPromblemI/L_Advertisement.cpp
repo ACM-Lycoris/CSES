@@ -1,4 +1,3 @@
-// Find the largest rectangle in a histogram.
 #include <bits/stdc++.h>
 using namespace std;
 

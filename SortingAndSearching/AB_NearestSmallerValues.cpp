@@ -1,4 +1,3 @@
-// Find the nearest smaller value to the left of each item.
 #include <bits/stdc++.h>
 using namespace std;
 using ll  = long long;

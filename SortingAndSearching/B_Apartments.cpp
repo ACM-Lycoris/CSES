@@ -1,4 +1,3 @@
-// Match applicants with suitable apartments.
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;

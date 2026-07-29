@@ -1,4 +1,3 @@
-// Match applicants with suitable apartments.
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
@@ -11,21 +10,21 @@ int main()
     cin.tie(nullptr);
 
     ll n, t;
-    cin >> n >> t; // 机器数量和产品数量
+    cin >> n >> t; // Number of machines and required products.
 
     vector<ll> k(n);
     for (int i = 0; i < n; i++)
     {
         cin >> k[i];
-    } // 每个机器生产一个产品所需的时间
+    } // Time each machine needs for one product.
 
     sort(k.begin(), k.end());
 
-    ll l = 0, r = k.back() * t; // 极端情况不会超过最慢的机器生产t个零件
+    ll l = 0, r = k.back() * t; // The slowest machine gives a safe upper limit.
 
     auto check = [&](const ll &time) -> bool
     {
-        ll cnt = 0; // 这个时间t下能生产的产品数量
+        ll cnt = 0; // Products made by this time.
         for (int num : k)
         {
             cnt+=time/num;

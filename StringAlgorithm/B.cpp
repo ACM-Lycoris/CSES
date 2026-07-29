@@ -1,4 +1,3 @@
-// Count pattern matches with the KMP algorithm.
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;

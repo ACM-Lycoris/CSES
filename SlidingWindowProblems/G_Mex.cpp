@@ -1,4 +1,3 @@
-// Find the mex of every sliding window.
 #include <bits/stdc++.h>
 using namespace std;
 

@@ -24,7 +24,7 @@ int main()
     }
 
     vector<vector<bool>> vis(n + 1, vector<bool>(m + 1, false));
-    vector<vector<pair<ll, ll>>> pre(n + 1, vector<pair<ll, ll>>(m + 1)); // 前驱点
+    vector<vector<pair<ll, ll>>> pre(n + 1, vector<pair<ll, ll>>(m + 1)); // Previous cell on the path.
 
     int dx[4] = {1, 0, -1, 0};
     int dy[4] = {0, 1, 0, -1};
@@ -37,7 +37,7 @@ int main()
         {
             if (graph[i][j] == 'A')
             {
-                // 开始
+                // Start BFS from A.
 
                 queue<pair<ll, ll>> q;
                 q.push({i, j});
@@ -54,10 +54,10 @@ int main()
                         ok = true;
                         while (true)
                         {
-                            auto [preX, preY] = pre[x][y]; // 获取上一个节点
+                            auto [preX, preY] = pre[x][y]; // Get the previous cell.
                             if (preX == x - 1)
                             {
-                                // 上一个点往下来的
+                                // The path moved down from the previous cell.
                                 Path.emplace_back('D');
                             }
                             else if (preX == x + 1)
@@ -95,7 +95,7 @@ int main()
                         {
                             q.push({nx, ny});
                             vis[nx][ny] = true;
-                            pre[nx][ny] = {x, y}; // 从x,y -> nx,ny
+                            pre[nx][ny] = {x, y}; // Record the move from (x, y) to (nx, ny).
                         }
                     }
                 }

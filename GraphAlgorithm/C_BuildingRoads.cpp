@@ -12,26 +12,26 @@ int main()
     ll n, m;
     cin >> n >> m;
 
-    vector<vector<ll>> graph(n + 1); // 邻接表
+    vector<vector<ll>> graph(n + 1); // Adjacency list.
     while (m--)
     {
         ll a, b;
         cin >> a >> b;
         graph[a].emplace_back(b);
-        graph[b].emplace_back(a); // 建边
+        graph[b].emplace_back(a); // Add an edge.
     }
 
     vector<ll> vis(n + 1, 0);
-    vector<ll> Isolates; // 独立连通块代表点
+    vector<ll> Isolates; // One node from each connected component.
 
     for (ll i = 1; i <= n; i++)
     {
         if (!vis[i])
         {
-            // 广搜染色
+            // Find this connected component with BFS.
             queue<ll> q;
             q.push(i);
-            Isolates.emplace_back(i); // 干脆以第一个点为代表点
+            Isolates.emplace_back(i); // Use the first node as its representative.
             vis[i] = true;
             while (!q.empty())
             {
@@ -49,7 +49,7 @@ int main()
         }
     }
 
-    // 探索完成
+    // All connected components are known.
     if (Isolates.size() == 1)
     {
         cout << 0 << endl;
@@ -58,7 +58,7 @@ int main()
     {
         cout << Isolates.size() - 1 << endl;
 
-        // 把每一个独立连通块的代表点连在一起
+        // Connect the representative nodes.
         ll Cnt = Isolates.size();
         for (ll i = 0; i < Cnt - 1; i++)
         {

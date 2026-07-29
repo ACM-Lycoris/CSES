@@ -1,4 +1,3 @@
-// Find the mode of every sliding window.
 #include <bits/stdc++.h>
 using namespace std;
 

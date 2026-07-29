@@ -1,4 +1,3 @@
-// Count distinct values in every sliding window.
 #include <bits/stdc++.h>
 using namespace std;
 

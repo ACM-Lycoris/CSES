@@ -1,4 +1,3 @@
-// Find the largest empty rectangle in the grid.
 #include <bits/stdc++.h>
 using namespace std;
 

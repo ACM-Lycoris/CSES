@@ -1,4 +1,3 @@
-// Match applicants with suitable apartments.
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
@@ -12,7 +11,7 @@ int main()
 
     ll x, n;
     cin >> x >> n;
-    // Length And Count of lights
+    // Track light positions and segment lengths.
 
     vector<ll> a(n);
     for (ll i = 0; i < n; i++)
@@ -20,19 +19,19 @@ int main()
         cin >> a[i];
     }
 
-    multiset<ll> Lens; // 存所有长度集合
-    set<ll> Sites;     // 存储所有灯的位置
+    multiset<ll> Lens; // Lengths of all road segments.
+    set<ll> Sites;     // Positions of all traffic lights.
     Sites.insert(0);
-    Sites.insert(x); // 加入两个哨兵路灯
+    Sites.insert(x); // Add two border lights.
     Lens.insert(x);
 
     auto Insert = [&](const ll p) -> void
     {
-        // 传入要插入的坐标p
+        // Insert a light at position p.
         auto it = Sites.lower_bound(p);
         if (*it == p)
         {
-            // 解出来坐标与p相等，就没有继续的必要
+            // Stop if a light already exists here.
             return;
         }
         ll Left = *(prev(it));
@@ -41,8 +40,8 @@ int main()
         ll len = Right - Left;
         ll newLen1 = p - Left, newLen2 = Right - p;
 
-        // Lens.erase(len);这样会按值删除，删除所有长度
-        auto del = Lens.find(len); // 返回一个
+        // erase(len) would remove every segment with this length.
+        auto del = Lens.find(len); // Find one matching segment.
         Lens.erase(del);
         Lens.insert(newLen1);
         Lens.insert(newLen2);

@@ -1,4 +1,3 @@
-// Find the XOR of all sliding window OR values.
 #include <bits/stdc++.h>
 using namespace std;
 

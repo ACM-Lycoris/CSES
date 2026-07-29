@@ -1,4 +1,3 @@
-// Find the minimum number of towers.
 #include <bits/stdc++.h>
 using namespace std;
 using ll  = long long;

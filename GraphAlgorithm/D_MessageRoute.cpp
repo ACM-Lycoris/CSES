@@ -26,7 +26,7 @@ int main()
     queue<int> q;
     q.push(1);
     vis[1] = true;
-    // 固定从1开始搜
+    // Start BFS from node 1.
     bool ok = false;
 
     vector<int> path;
@@ -37,21 +37,21 @@ int main()
         q.pop();
         if (u == n)
         {
-            // 找到
+            // Node n is reached.
             ok = true;
-            path.emplace_back(n); // 找到了才能放
-            // 还原最短路
+            path.emplace_back(n); // Add n after it is reached.
+            // Restore the shortest path.
             while (true)
             {
-                int PreU = pre[u]; // 找到前驱节点
+                int PreU = pre[u]; // Get the previous node.
                 path.emplace_back(PreU);
                 if (PreU == 1)
                 {
-                    break; // 结束
+                    break; // The full path is ready.
                 }
                 else
                 {
-                    u = PreU; // 不是就继续
+                    u = PreU; // Continue with the previous node.
                 }
             }
 

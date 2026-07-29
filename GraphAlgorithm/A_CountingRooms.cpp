@@ -36,7 +36,7 @@ int main()
         {
             if (graph[i][j] == '.' && !vis[i][j])
             {
-                // 启动广搜
+                // Start BFS for a new room.
                 ansCnt++;
                 
                 queue<pair<ll, ll>> q;
