@@ -27,7 +27,7 @@ int main()
     q.push(1);
     vis[1] = true;
     // 固定从1开始搜
-    bool ok=false;
+    bool ok = false;
 
     vector<int> path;
 
@@ -35,44 +35,53 @@ int main()
     {
         int u = q.front();
         q.pop();
-        if(u==n){
-            //找到
-            ok=true;
-            path.emplace_back(n);//找到了才能放
-            //还原最短路
-            while(true){
-                int PreU=pre[u];//找到前驱节点
+        if (u == n)
+        {
+            // 找到
+            ok = true;
+            path.emplace_back(n); // 找到了才能放
+            // 还原最短路
+            while (true)
+            {
+                int PreU = pre[u]; // 找到前驱节点
                 path.emplace_back(PreU);
-                if(PreU==1){
-                    break;//结束
-                }else{
-                    u=PreU;//不是就继续
+                if (PreU == 1)
+                {
+                    break; // 结束
+                }
+                else
+                {
+                    u = PreU; // 不是就继续
                 }
             }
 
             break;
         }
-        for(int v : graph[u])
+        for (int v : graph[u])
         {
-            if(!vis[v]){
+            if (!vis[v])
+            {
                 q.push(v);
-                vis[v]=true;
-                pre[v]=u;
+                vis[v] = true;
+                pre[v] = u;
             }
         }
     }
 
-    if(ok){
-        cout<<path.size()<<endl;
+    if (ok)
+    {
+        cout << path.size() << endl;
         reverse(all(path));
-        for(int x:path){
-            cout<<x<<' ';
+        for (int x : path)
+        {
+            cout << x << ' ';
         }
-        cout<<endl;
-    }else{
-        cout<<"IMPOSSIBLE\n";
+        cout << endl;
     }
-
+    else
+    {
+        cout << "IMPOSSIBLE\n";
+    }
 
     return 0;
 }
