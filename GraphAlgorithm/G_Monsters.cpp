@@ -4,6 +4,9 @@ using ll = long long;
 using ull = unsigned long long;
 #define all(x) x.begin(), x.end()
 
+int dx[4] = {0, 1, 0, -1};
+int dy[4] = {1, 0, -1, 0};
+
 int main()
 {
     ios::sync_with_stdio(false);
@@ -11,92 +14,142 @@ int main()
 
     ll n, m;
     cin >> n >> m;
+    vector<vector<char>> graph(n + 1, vector<char>(m + 1));
 
-    vector<vector<ll>> graph(n + 1);
-    while (m--)
-    {
-        ll a, b;
-        cin >> a >> b;
-        graph[a].emplace_back(b);
-        graph[b].emplace_back(a);
-    }
+    queue<pair<int, int>> q;                                         // 多源广搜用队列
+    vector<vector<int>> MonsterDist(n + 1, vector<int>(m + 1, 1e8)); // 每一个点，最快有怪物到达的时候
+    vector<vector<bool>> visM(n + 1, vector<bool>(m + 1, false));
 
-    vector<ll> vis(n + 1, 0);
-    vector<ll> pre(n + 1, -1);
-
-    ll cycleStart = -1, cycleEnd = -1;
-
-    auto DFS = [&](auto &&self, ll u, ll father) -> bool
-    {
-        vis[u] = true;
-        for (ll v : graph[u])
-        {
-            if (v == father)
-            {
-                continue;
-            }
-            if (!vis[v])
-            {
-                // Visit this node for the first time.
-                pre[v] = u;
-
-                if (self(self, v, u))
-                {
-                    return true; // Stop after a cycle is found.
-                }
-            }
-            else
-            {
-                // A cycle is found.
-                pre[v] = u; // Close the cycle with this edge.
-                cycleEnd = u;
-                cycleStart = v;
-                return true;
-            }
-        }
-        // No cycle was found from this node.
-        return false;
-    };
-
-    vector<ll> path;
-
-    bool have = false;
+    int Ax, Ay;
 
     for (int i = 1; i <= n; i++)
     {
-        if (!vis[i])
+        string line;
+        cin >> line;
+        for (int j = 1; j <= m; j++)
         {
-            bool ok = DFS(DFS, i, -1);
-            if (!ok)
+            graph[i][j] = line[j - 1];
+            if (graph[i][j] == 'M')
             {
-                continue;
+                q.push({i, j});
+                MonsterDist[i][j] = 0; // 已有怪物
+                visM[i][j] = true;
+                // 一起放入队列，做多源BFS
             }
-            else
+            if (graph[i][j] == 'A')
             {
-                // Restore the cycle.
-                have = true;
-
-                ll v = cycleEnd;
-                path.emplace_back(v);
-                for (ll u = pre[v]; u != v; u = pre[u])
-                {
-                    path.emplace_back(u);
-                }
-                path.emplace_back(v);
-
-                cout << path.size() << endl;
-                for (ll num : path)
-                {
-                    cout << num << ' ';
-                }
-                cout << endl;
-                return 0; // Stop after printing the cycle.
+                Ax = i;
+                Ay = j;
             }
         }
     }
-    if (!have)
+
+    while (!q.empty())
     {
-        cout << "IMPOSSIBLE\n";
+        auto [x, y] = q.front();
+        q.pop();
+
+        for (int k = 0; k < 4; k++)
+        {
+            int nx = x + dx[k], ny = y + dy[k];
+
+            if (nx >= 1 && nx <= n && ny >= 1 && ny <= m && graph[nx][ny] != '#')
+            {
+                // MonsterDist[nx][ny]=min(MonsterDist[nx][ny],MonsterDist[x][y]+1);//距离更新
+                if (!visM[nx][ny] || (visM[nx][ny] && MonsterDist[x][y] + 1 < MonsterDist[nx][ny]))
+                {
+                    q.push({nx, ny});
+                    visM[nx][ny] = true;
+                    MonsterDist[nx][ny] = min(MonsterDist[nx][ny], MonsterDist[x][y] + 1);
+                }
+            }
+        }
+    }
+
+    // 怪物广搜完成，开始玩家寻路
+    vector<vector<bool>> visA(n + 1, vector<bool>(m + 1, 0));
+    vector<vector<pair<int, int>>> pre(n + 1, vector<pair<int, int>>(m + 1));
+    vector<vector<int>> PlayerDist(n + 1, vector<int>(m + 1, 1e8));
+    queue<pair<int, int>> qA;
+
+    visA[Ax][Ay] = true;
+
+    PlayerDist[Ax][Ay] = 0;
+
+    vector<char> path;
+
+    qA.push({Ax, Ay});
+
+    bool ok = false;
+
+    while (!qA.empty())
+    {
+        auto [x, y] = qA.front();
+        qA.pop();
+        if (x == 1 || x == n || y == 1 || y == m)
+        {
+            // Escape
+            ok = true;
+
+            while (x!= Ax || y != Ay)
+            {
+                auto [preX, preY] = pre[x][y];
+                if (preY == y - 1)
+                {
+                    path.push_back('R');
+                }
+                else if (preY == y + 1)
+                {
+                    path.push_back('L');
+                }
+                else if (preX == x - 1)
+                {
+                    path.push_back('D');
+                }
+                else if (preX == x + 1)
+                {
+                    path.push_back('U');
+                }
+                x = preX;
+                y = preY;
+                if (x == Ax && y == Ay)
+                {
+                    break;
+                }
+            }
+
+            reverse(all(path));
+            cout << "YES\n";
+            cout << path.size() << "\n";
+            for (auto c : path)
+            {
+                cout << c;
+            }
+            cout << "\n";
+            return 0;
+        }
+
+        for (int k = 0; k < 4; k++)
+        {
+            int nx = x + dx[k];
+            int ny = y + dy[k];
+
+            if (nx >= 1 && nx <= n && ny >= 1 && ny <= m && graph[nx][ny] != '#')
+            {
+                if (!visA[nx][ny] && (PlayerDist[x][y] + 1 < MonsterDist[nx][ny]))
+                {
+                    qA.push({nx, ny});
+                    visA[nx][ny] = true;
+                    pre[nx][ny] = {x, y};
+                    PlayerDist[nx][ny] = min(PlayerDist[nx][ny], PlayerDist[x][y] + 1);
+                }
+            }
+        }
+    }
+
+    if (!ok)
+    {
+        cout << "NO\n";
     }
 
     return 0;
