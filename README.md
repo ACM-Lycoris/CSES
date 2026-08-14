@@ -14,6 +14,6 @@ g++ -std=c++17 path/to/solution.cpp -o solution
 
 The repository is updated as I work through the problem set. Comments use basic English and explain only the parts that may not be clear from the code.
 
-##About AI
+## About AI
 
 I use AI only when learning knowledge or making bulk changes to comments.
